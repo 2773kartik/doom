@@ -14,7 +14,7 @@ def generate_map(width, height):
     # Add random obstacles (1) to the map
     for _ in range(int(width * height * 0.2)):  # 20% of the map will be obstacles
         x, y = random.randint(1, width - 2), random.randint(1, height - 2)
-        map[y][x] = 1
+        map[y][x] = random.randint(2, 4)
 
     return map
 

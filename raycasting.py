@@ -37,6 +37,7 @@ class RayCasting:
         x_map, y_map = self.game.player.map_pos
         
         ray_angle = self.game.player.angle - HALF_FOV + 0.0001
+        texture_vert, texture_hor = 0, 0
         for ray in range(NUM_RAYS):
             sin_a = math.sin(ray_angle)
             cos_a = math.cos(ray_angle)
