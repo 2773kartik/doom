@@ -1,5 +1,7 @@
 import pygame as pg
 from settings import *
+import os
+from collections import deque
 
 class SpriteObject:
     def __init__(self, game, path='resources/sprites/static_sprites/candlebra.png', 
@@ -48,3 +50,40 @@ class SpriteObject:
         
     def update(self):
         self.get_sprite()
+        
+    
+class AnimatedSprite(SpriteObject):
+    def __init__(self, game, path='resources/sprites/animated_sprites/torch4/0.png',
+                 pos=(1.5, 6.5), scale=0.7, shift=0.15, animation_time=120):
+        super().__init__(game, path, pos, scale, shift)
+        self.animation_time = animation_time
+        self.path = path.rsplit('/', 1)[0]
+        self.images = self.get_images(self.path)
+        self.animation_time_prev = pg.time.get_ticks()
+        self.animation_trigger = False
+        
+    def update(self):
+        super().update()
+        self.check_animation_time()
+        self.animate(self.images)
+        
+    def animate(self, images):
+        if self.animation_trigger:
+            images.rotate(-1)
+            self.image = images[0]
+        
+    def check_animation_time(self):
+        self.animation_trigger = False
+        time_now = pg.time.get_ticks()
+        if time_now - self.animation_time_prev > self.animation_time:
+            self.animation_trigger = True
+            self.animation_time_prev = time_now
+        
+    def get_images(self, path):
+        images = deque()
+        for file in os.listdir(path):
+            if os.path.isfile(os.path.join(path, file)):
+                img = pg.image.load(path+'/'+file).convert()
+                img.set_colorkey((0,255,255))
+                images.append(img)
+        return images
