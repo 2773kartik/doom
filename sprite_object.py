@@ -4,12 +4,13 @@ import os
 from collections import deque
 
 class SpriteObject:
-    def __init__(self, game, path='resources/sprites/static_sprites/candlebra.png', 
+    def __init__(self, game, path='resources/sprites/static_sprites/fountain.png', 
                  pos=(1.5, 7.5), scale=0.6, shift=0.27):
         self.game = game
         self.player = game.player
         self.x, self.y = pos
-        self.image = pg.image.load(path).convert_alpha()
+        self.image = pg.image.load(path).convert()
+        self.image.set_colorkey((0, 255, 255))
         self.IMAGE_WIDTH = self.image.get_width()
         self.IMAGE_HALF_WIDTH = self.image.get_width() // 2
         self.IMAGE_RATIO = self.IMAGE_WIDTH / self.image.get_height()
