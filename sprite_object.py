@@ -5,12 +5,14 @@ from collections import deque
 
 class SpriteObject:
     def __init__(self, game, path='resources/sprites/static_sprites/fountain.png', 
-                 pos=(1.5, 7.5), scale=0.6, shift=0.27):
+                 pos=(1.5, 7.5), scale=0.6, shift=0.27, colorkey=(0, 255, 255), alpha=False):
         self.game = game
         self.player = game.player
         self.x, self.y = pos
+        self.colorkey = colorkey
+        self.alpha = alpha
         self.image = pg.image.load(path).convert()
-        self.image.set_colorkey((0, 255, 255))
+        self.image.set_colorkey(self.colorkey)
         self.IMAGE_WIDTH = self.image.get_width()
         self.IMAGE_HALF_WIDTH = self.image.get_width() // 2
         self.IMAGE_RATIO = self.IMAGE_WIDTH / self.image.get_height()
@@ -55,8 +57,8 @@ class SpriteObject:
     
 class AnimatedSprite(SpriteObject):
     def __init__(self, game, path='resources/sprites/animated_sprites/torch4/0.png',
-                 pos=(1.5, 6.5), scale=0.7, shift=0.15, animation_time=120):
-        super().__init__(game, path, pos, scale, shift)
+                 pos=(1.5, 6.5), scale=0.7, shift=0.15, animation_time=120, colorkey=(0, 255, 255), alpha=False):
+        super().__init__(game, path, pos, scale, shift, colorkey, alpha)
         self.animation_time = animation_time
         self.path = path.rsplit('/', 1)[0]
         self.images = self.get_images(self.path)
@@ -85,6 +87,9 @@ class AnimatedSprite(SpriteObject):
         for file in os.listdir(path):
             if os.path.isfile(os.path.join(path, file)):
                 img = pg.image.load(path+'/'+file).convert()
-                img.set_colorkey((0,255,255))
+                if not self.alpha:
+                    img.set_colorkey(self.colorkey)
+                else:
+                    img.convert_alpha()
                 images.append(img)
         return images
