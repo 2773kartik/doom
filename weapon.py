@@ -7,7 +7,7 @@ class Weapon(AnimatedSprite):
                  scale=2, animation_time=90, alpha = True, ammo=2):
         super().__init__(game, path, scale=scale, animation_time=animation_time, alpha=alpha)
         self.images = deque(
-            [pg.transform.smoothscale(img, (self.image.get_width() * scale, self.image.get_height() * scale))
+            [pg.transform.scale(img, (self.image.get_width() * scale, self.image.get_height() * scale))
              for img in self.images]
         )
         self.image = self.images[0]
@@ -17,13 +17,13 @@ class Weapon(AnimatedSprite):
         self.click_path = click_path.rsplit('/', 1)[0]
         self.click_images = self.get_images(self.click_path)
         self.click_images = deque(
-            [pg.transform.smoothscale(img, (self.image.get_width() * scale, self.image.get_height() * scale))
+            [pg.transform.scale(img, (self.image.get_width() * scale, self.image.get_height() * scale))
              for img in self.click_images]
         )
         self.reload_path = reload_path.rsplit('/', 1)[0]
         self.reload_images = self.get_images(self.reload_path)
         self.reload_images = deque(
-            [pg.transform.smoothscale(img, (self.image.get_width() * scale, self.image.get_height() * scale))
+            [pg.transform.scale(img, (self.image.get_width() * scale, self.image.get_height() * scale))
              for img in self.reload_images]
         )
         self.num_images = len(self.images)
