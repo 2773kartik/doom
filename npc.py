@@ -47,6 +47,10 @@ class NPC(AnimatedSprite):
             dx = math.cos(angle) * self.speed
             dy = math.sin(angle) * self.speed
             self.check_wall_collision(dx, dy)
+            
+    def attack(self):
+        if self.animation_trigger:
+            pass
         
     def animate_death(self):
         if not self.alive:
@@ -80,8 +84,13 @@ class NPC(AnimatedSprite):
                 self.animate_pain()
             elif self.ray_cast_value:
                 self.player_search_trigger = True
-                self.animate(self.walk_images)
-                self.movement()
+                
+                if self.dist < self.attack_distance:
+                    self.animate(self.attack_images)
+                    self.attack()
+                else:    
+                    self.animate(self.walk_images)
+                    self.movement()
             elif self.player_search_trigger:
                 self.animate(self.walk_images)
                 self.movement()
