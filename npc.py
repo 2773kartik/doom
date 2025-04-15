@@ -2,7 +2,7 @@ from sprite_object import *
 from random import randint, choice, uniform
 
 class NPC(AnimatedSprite):
-    def __init__(self, game, path='resources/sprites/npc/soldier/0.png', pos=(1.5, 2.5),
+    def __init__(self, game, path='resources/sprites/npc/soldier/0.png', pos=(1.5, 8.5),
                  scale=0.6, shift=0.38, animation_time=180, alpha=True):
         super().__init__(game, path, pos, scale, shift, animation_time, alpha=alpha)
         self.attack_images = self.get_images(self.path + '/attack')
@@ -21,12 +21,22 @@ class NPC(AnimatedSprite):
         self.pain = False
         self.ray_cast_value = False
         self.frame_counter = 0
+        self.player_search_trigger = False
         
     def update(self):
         self.check_animation_time()
         self.get_sprite()
         self.run_logic()
         
+    def check_wall(self, x, y):
+        return (x, y) not in self.game.map.world_map
+    
+    def check_wall_collision(self, dx, dy):
+        if self.check_wall(int(self.x + dx * self.size), int(self.y)):
+            self.x += dx
+        if self.check_wall(int(self.x), int(self.y + dy * self.size)):
+            self.y += dy
+            
     def movement(self):
         next_pos = self.game.player.map_pos
         next_x, next_y = next_pos
@@ -65,6 +75,13 @@ class NPC(AnimatedSprite):
             self.check_hit_in_npc()
             if self.pain:
                 self.animate_pain()
+            elif self.ray_cast_value:
+                self.player_search_trigger = True
+                self.animate(self.walk_images)
+                self.movement()
+            elif self.player_search_trigger:
+                self.animate(self.walk_images)
+                self.movement()
             else:
                 self.animate(self.idle_images)
         else:
