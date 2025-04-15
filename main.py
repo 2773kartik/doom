@@ -8,6 +8,7 @@ from object_renderer import *
 from object_handler import *
 from weapon import *
 from sound import *
+from pathfinder import *
 
 class Game:
     def __init__(self):
@@ -29,6 +30,7 @@ class Game:
         self.object_handler = ObjectHandler(self)
         self.weapon = Weapon(self)
         self.sound = Sound(self)
+        self.pathfinder = Pathfinding(self)
     
     def update(self):
         self.player.update()
@@ -40,9 +42,11 @@ class Game:
         pg.display.set_caption(f"FPS: {self.clock.get_fps():.2f}")
         
     def draw(self):
-        # self.screen.fill('black')
-        self.object_renderer.draw()
-        self.weapon.draw()
+        self.screen.fill('black')
+        # self.object_renderer.draw()
+        # self.weapon.draw()
+        self.player.draw()
+        self.map.draw()
     
     def check_events(self):
         self.global_trigger = False

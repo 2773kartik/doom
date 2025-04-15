@@ -2,7 +2,7 @@ from sprite_object import *
 from random import randint, choice, uniform
 
 class NPC(AnimatedSprite):
-    def __init__(self, game, path='resources/sprites/npc/soldier/0.png', pos=(1.5, 8.5),
+    def __init__(self, game, path='resources/sprites/npc/soldier/0.png', pos=(1.5, 7.5),
                  scale=0.6, shift=0.38, animation_time=180, alpha=True):
         super().__init__(game, path, pos, scale, shift, animation_time, alpha=alpha)
         self.attack_images = self.get_images(self.path + '/attack')
@@ -27,6 +27,7 @@ class NPC(AnimatedSprite):
         self.check_animation_time()
         self.get_sprite()
         self.run_logic()
+        self.draw_ray_cast()
         
     def check_wall(self, x, y):
         return (x, y) not in self.game.map.world_map
@@ -38,7 +39,7 @@ class NPC(AnimatedSprite):
             self.y += dy
             
     def movement(self):
-        next_pos = self.game.player.map_pos
+        next_pos = self.game.pathfinder.get_path(self.map_pos, self.game.player.map_pos)
         next_x, next_y = next_pos
         angle = math.atan2(next_y + 0.5 - self.y, next_x + 0.5 - self.x)
         dx = math.cos(angle) * self.speed

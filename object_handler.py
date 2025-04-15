@@ -12,12 +12,14 @@ class ObjectHandler:
         add_sprite = self.add_sprite
         add_npc = self.add_npc
         
+        
         #sprite map
         add_sprite(SpriteObject(game))
         add_sprite(AnimatedSprite(game))
         
         #npc map
         add_npc(NPC(game))
+        add_npc(NPC(game, pos=(2.5, 8.5)))
         
     def update(self):
         [sprite.update() for sprite in self.sprite_list]
