@@ -27,9 +27,17 @@ class NPC(AnimatedSprite):
         self.get_sprite()
         self.run_logic()
         
+    def movement(self):
+        next_pos = self.game.player.map_pos
+        next_x, next_y = next_pos
+        angle = math.atan2(next_y + 0.5 - self.y, next_x + 0.5 - self.x)
+        dx = math.cos(angle) * self.speed
+        dy = math.sin(angle) * self.speed
+        self.check_wall_collision(dx, dy)
+        
     def animate_death(self):
         if not self.alive:
-            if self.animation_trigger and self.frame_counter < len(self.death_images) - 1:
+            if self.game.global_trigger and self.frame_counter < len(self.death_images) - 1:
                 self.death_images.rotate(-1)
                 self.image = self.death_images[0]
                 self.frame_counter += 1
