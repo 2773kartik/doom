@@ -1,5 +1,5 @@
 from sprite_object import *
-from random import randint, choice, uniform
+from random import randint, choice, uniform, random
 
 class NPC(AnimatedSprite):
     def __init__(self, game, path='resources/sprites/npc/soldier/0.png', pos=(1.5, 7.5),
@@ -50,7 +50,8 @@ class NPC(AnimatedSprite):
             
     def attack(self):
         if self.animation_trigger:
-            pass
+            if random() < self.accuracy:
+                self.game.player.get_damage(self.attack_damage)
         
     def animate_death(self):
         if not self.alive:
