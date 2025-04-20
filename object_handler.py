@@ -14,12 +14,17 @@ class ObjectHandler:
         self.npc_positions = {}
         
         #sprite map
-        add_sprite(SpriteObject(game))
-        add_sprite(AnimatedSprite(game))
+        for item in self.game.levels.static:
+            add_sprite(SpriteObject(game, path=item[0], pos=item[1], scale=item[2],
+                         shift=item[3], colorkey=item[5], alpha=item[4]))
+        
+        for item in self.game.levels.animated:
+            add_sprite(AnimatedSprite(game, path=item[0], pos=item[1], scale=item[2],
+                         shift=item[3], colorkey=item[5], alpha=item[4]))
         
         #npc map
-        add_npc(NPC(game))
-        add_npc(NPC(game, pos=(2.5, 8.5)))
+        for item in self.game.levels.npc:
+            add_npc(NPC(game, path=item[0], pos=item[1]))
         
     def update(self):
         self.npc_positions = {npc.map_pos for npc in self.npc_list if npc.alive}

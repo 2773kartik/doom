@@ -9,6 +9,7 @@ from object_handler import *
 from weapon import *
 from sound import *
 from pathfinder import *
+from levels import *
 
 class Game:
     def __init__(self):
@@ -23,6 +24,7 @@ class Game:
         self.new_game()
     
     def new_game(self):
+        self.levels = Levels(self)
         self.map = Map(self)
         self.player = Player(self)
         self.object_renderer = ObjectRenderer(self)

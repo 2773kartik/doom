@@ -6,7 +6,7 @@ class ObjectRenderer:
         self.game = game
         self.screen = game.screen
         self.wall_textures = self.load_wall_textures()
-        self.sky_image = self.get_texture('resources/textures/SKY4.png', res=(WIDTH, HALF_HEIGHT))
+        self.sky_image = self.get_texture(self.game.levels.sky, res=(WIDTH, HALF_HEIGHT))
         self.sky_offset = 0
         self.blood_screen = self.get_texture('resources/textures/FIREMAG1.png', RES)
         self.digit_size = 80
@@ -50,8 +50,5 @@ class ObjectRenderer:
     
     def load_wall_textures(self):
         return {
-            1: self.get_texture('resources/textures/STONE2.png'),
-            2: self.get_texture('resources/textures/STONE3.png'),
-            3: self.get_texture('resources/textures/STONGARG.png'),
-            4: self.get_texture('resources/textures/SP_DUDE1.png')
+            i+1: self.get_texture(self.game.levels.wall[i]) for i in range(len(self.game.levels.wall))
         }

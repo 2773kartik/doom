@@ -41,7 +41,7 @@ mini_map = [
 class Map:
     def __init__(self, game):
         self.game = game
-        self.mini_map = mini_map
+        self.mini_map = self.game.levels.map
         self.world_map = {}
         self.get_map()
         
