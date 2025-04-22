@@ -23,7 +23,9 @@ class ObjectRenderer:
         self.screen.blit(self.game_over_screen, (0, 0))
         
     def draw_player_health(self):
-        health = str(self.game.player.health)
+        if int(self.game.player.health) <= 0:
+            self.game.player.health = 0
+        health = str(int(self.game.player.health))
         for i, char in enumerate(health):
             self.screen.blit(self.digits[char], (i*self.digit_size, 0))
         self.screen.blit(self.digits['10'], ((i+1)*self.digit_size, 0))

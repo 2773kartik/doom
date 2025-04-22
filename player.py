@@ -28,7 +28,8 @@ class Player:
             self.game.object_renderer.game_over()
             pg.display.flip()
             pg.time.delay(2000)
-            self.game.new_game()
+            self.game.menu.state = 0
+            self.game.menu_state = True
         
     def get_damage(self, damage):
         self.health -= damage
