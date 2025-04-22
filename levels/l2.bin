@@ -16,7 +16,7 @@ map
 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
 sky
-resources/TexturesAD/Walls/SKY6.png
+resources/textures/SKY6.png
 wall
 resources/textures/STARG2.png
 resources/textures/TEKWALL1.png

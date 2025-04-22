@@ -55,10 +55,12 @@ class Menu:
                     elif HALF_WIDTH - self.l2.get_width()//2 < mouse[0] < HALF_WIDTH + self.l2.get_width()//2 and \
                          HEIGHT // 2 + 100 < mouse[1] < HEIGHT // 2 + 100 + self.l2.get_height():
                         self.game.new_game(2)
+                        self.game.sound.doom_music.stop()
                         self.game.menu_state = False
                     elif HALF_WIDTH - self.l3.get_width()//2 < mouse[0] < HALF_WIDTH + self.l3.get_width()//2 and \
                          HEIGHT // 2 + 200 < mouse[1] < HEIGHT // 2 + 200 + self.l3.get_height():
                         self.game.new_game(3)
+                        self.game.sound.doom_music.stop()
                         self.game.menu_state = False
            
     def draw(self):

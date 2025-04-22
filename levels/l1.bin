@@ -13,9 +13,9 @@ map
 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 sky
-resources/TexturesAD/Walls/SKY9.png
+resources/textures/SKY9.png
 wall
-resources/TexturesAD/Flats/DU_10D(Overseas).png
+resources/textures/DU_10D(Overseas).png
 resources/textures/BIGDOOR5.png
 resources/textures/CEMENT3.png
 resources/textures/CEMPOIS.png
