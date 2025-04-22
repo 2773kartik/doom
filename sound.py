@@ -9,3 +9,4 @@ class Sound():
         self.spas12_change = pg.mixer.Sound(self.path + 'SPASCOC2.ogg')
         self.spas12_clic = pg.mixer.Sound(self.path + 'SPASCLIC.ogg')
         self.spas12_reload = pg.mixer.Sound(self.path + 'SPASLOAD.ogg')
+        self.doom_music = pg.mixer.Sound(self.path + 'DOOM.mp3')

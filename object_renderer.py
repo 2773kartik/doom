@@ -33,10 +33,22 @@ class ObjectRenderer:
         
     def draw_background(self):
         self.sky_offset = (self.sky_offset + 4.5 * self.game.player.rel) % WIDTH
+
+        # Draw sky
         self.screen.blit(self.sky_image, (-self.sky_offset, 0))
         self.screen.blit(self.sky_image, (-self.sky_offset + WIDTH, 0))
-        # floor
-        pg.draw.rect(self.screen, FLOOR_COLOR, (0, HALF_HEIGHT, WIDTH, HEIGHT))
+
+        # Draw floor base color
+        pg.draw.rect(self.screen, FLOOR_COLOR, (0, HALF_HEIGHT, WIDTH, HALF_HEIGHT))
+
+        # Create and draw reflection
+        flipped_sky = pg.transform.flip(self.sky_image, True, True)
+        flipped_sky.set_alpha(10)  # Make it partially transparent
+
+        self.screen.blit(flipped_sky, (-self.sky_offset, HALF_HEIGHT))
+        self.screen.blit(flipped_sky, (-self.sky_offset + WIDTH, HALF_HEIGHT))
+
+
     
     def render_game_objects(self):
         list_objects = sorted(self.game.raycasting.objects_to_render, key=lambda t: t[0], reverse=True)

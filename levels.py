@@ -1,10 +1,11 @@
 class Levels:
-    def __init__(self, game):
+    def __init__(self, game, level):
         self.game = game
         self.counter = 0
-        self.generate_bin('level.txt')
+        print(level)
+        self.generate_bin(f'level.txt')
         
-        self.map, self.sky, self.wall, self.static, self.animated, self.npc = self.read_bin('level.bin')
+        self.map, self.sky, self.wall, self.static, self.animated, self.npc = self.read_bin(f'levels/l{level}.bin')
         print(self.static)
     
     def read_bin(self, path):
