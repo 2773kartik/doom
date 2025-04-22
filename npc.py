@@ -3,7 +3,7 @@ from random import randint, choice, uniform, random
 
 class NPC(AnimatedSprite):
     def __init__(self, game, path='resources/sprites/npc/soldier/0.png', pos=(1.5, 7.5),
-                 scale=0.6, shift=0.38, animation_time=180, alpha=True):
+                 scale=0.6, shift=0.38, animation_time=180, alpha=True, damage=10, acc=0.15):
         super().__init__(game, path, pos, scale, shift, animation_time, alpha=alpha)
         self.attack_images = self.get_images(self.path + '/attack')
         self.death_images = self.get_images(self.path + '/death')
@@ -15,8 +15,8 @@ class NPC(AnimatedSprite):
         self.speed = 0.03
         self.size = 10
         self.health = 150
-        self.attack_damage = 10
-        self.accuracy = 0.15
+        self.attack_damage = damage
+        self.accuracy = acc
         self.alive = True
         self.pain = False
         self.ray_cast_value = False

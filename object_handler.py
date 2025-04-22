@@ -24,7 +24,7 @@ class ObjectHandler:
         
         #npc map
         for item in self.game.levels.npc:
-            add_npc(NPC(game, path=item[0], pos=item[1]))
+            add_npc(NPC(game, path=item[0], pos=item[1],  damage=item[2], acc=item[3]))
         
     def update(self):
         self.npc_positions = {npc.map_pos for npc in self.npc_list if npc.alive}
