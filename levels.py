@@ -2,8 +2,6 @@ class Levels:
     def __init__(self, game, level):
         self.game = game
         self.counter = 0
-        print(level)
-        self.generate_bin(f'level.txt')
         
         self.map, self.sky, self.wall, self.static, self.animated, self.npc = self.read_bin(f'levels/l{level}.bin')
         print(self.static)
@@ -50,7 +48,7 @@ class Levels:
                 animated.append([animated_sprite[0], (float(animated_sprite[1]), float(animated_sprite[2])), float(animated_sprite[3]), float(animated_sprite[4]), animated_sprite[5]=='0', (int(animated_sprite[6]), int(animated_sprite[7]), int(animated_sprite[8]))])
             if self.counter == 6:
                 npc_data = line.split()
-                npc.append([npc_data[0], (float(npc_data[1]), float(npc_data[2]))], float(npc_data[3]), float(npc_data[4]))
+                npc.append([npc_data[0], (float(npc_data[1]), float(npc_data[2])), float(npc_data[3]), float(npc_data[4])])
         
         file.close()
         return maps, sky, wall, static, animated, npc
